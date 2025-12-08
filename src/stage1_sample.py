@@ -47,7 +47,7 @@ def load_parquet(image_path: Path, idx: int = 0):
     df = df.sort("index")
     
     pixel_key = "observations.images.front_img_1"
-    img_size = 256
+    img_size = 64
     img_transform = transforms.Compose(
         [
             transforms.Resize(img_size),
