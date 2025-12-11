@@ -3,7 +3,6 @@
 NPROC_PER_NODE=${NPROC_PER_NODE:-$(nvidia-smi --list-gpus | wc -l)}
 echo "Using ${NPROC_PER_NODE} GPUs for distributed sampling."
 
-DATA_PATH='/coc/cedarp-dxu345-0/bli678/egoverse/processed_v1/put_cup_on_saucer/put_cup_on_saucer_rl2_lab_scene_1_recording_1_processed/data/chunk-000/episode_000040.parquet'
 SAMPLE_DIR='outputs'
 IMAGE_SIZE=256
 
@@ -15,8 +14,7 @@ IMAGE_SIZE=256
 #   --image-size ${IMAGE_SIZE}
 
 torchrun --standalone --nproc_per_node=${NPROC_PER_NODE} \
-  src/stage1_sample_ddp.py \
+  src/test_decoder.py \
   --config configs/stage1/pretrained/DINOv2-B.yaml \
-  --data-path ${DATA_PATH} \
   --sample-dir ${SAMPLE_DIR} \
   --image-size ${IMAGE_SIZE}

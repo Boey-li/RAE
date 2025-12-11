@@ -81,7 +81,7 @@ class RAE(nn.Module):
         if h != self.encoder_input_size or w != self.encoder_input_size:
             x = nn.functional.interpolate(x, size=(self.encoder_input_size, self.encoder_input_size), mode='bicubic', align_corners=False)
         x = (x - self.encoder_mean.to(x.device)) / self.encoder_std.to(x.device)
-        z = self.encoder(x)
+        z = self.encoder(x) # [B, N, D], [4, 256, 768]
         if self.training and self.noise_tau > 0:
             z = self.noising(z)
         if self.reshape_to_2d:
