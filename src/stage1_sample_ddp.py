@@ -288,7 +288,6 @@ def main(args):
             with autocast(**autocast_kwargs):
                 latents = rae.encode(images) # [B, D, H, W], [4, 768, 16, 16]
                 recon = rae.decode(latents)  # [B, C, H, W]
-                import pdb; pdb.set_trace()
             recon = recon.clamp(0, 1)
             recon_np = recon.mul(255).permute(0, 2, 3, 1).to("cpu", dtype=torch.uint8).numpy()
 
